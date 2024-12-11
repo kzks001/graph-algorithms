@@ -2,7 +2,11 @@ import numpy as np
 from loguru import logger
 
 
-# Adjacency Matrix
+######################
+## Adjacency Matrix ##
+######################
+
+
 class AdjMat:
     """A class to represent a graph using an adjacency matrix.
 
@@ -80,3 +84,8 @@ class AdjMat:
     def display(self):
         """logger.info the adjacency matrix in a readable format."""
         logger.info(f"\n{self.matrix}")
+
+
+####################
+## Adjacency list ##
+####################
