@@ -127,3 +127,32 @@ def postorder_dfs(node: TreeNode) -> None:
     postorder_dfs(node.left)
     postorder_dfs(node.right)
     logger.info(node.val)
+
+
+###########################################
+## Example: Maximum Depth of Binary Tree ##
+###########################################
+
+
+def max_depth(root: TreeNode) -> int:
+    """Finds the maximum depth of a binary tree.
+
+    This function calculates the depth as the number of nodes along the longest
+    path from the root to a leaf node.
+
+    Args:
+        root (TreeNode): The root node of the binary tree to traverse.
+            The `TreeNode` class should have `left` and `right` attributes for
+            its child nodes.
+
+    Returns:
+        int: The maximum depth of the binary tree, measured as the number of
+        nodes from the root to the furthest leaf.
+    """
+    if root is None:
+        return 0
+
+    left_depth = max_depth(root.left)
+    right_depth = max_depth(root.right)
+
+    return max(left_depth, right_depth) + 1
