@@ -34,8 +34,8 @@ def max_depth_iterative(root: TreeNode) -> int:
     """Finds the maximum depth of a binary tree using an iterative approach.
 
     This function calculates the depth as the number of nodes along the longest
-    path from the root to a leaf node. It uses a stack to simulate the depth-first
-    traversal of the tree.
+    path from the root to a leaf node. It uses a stack to simulate the
+    depth-first traversal of the tree.
 
     Args:
         root (TreeNode): The root node of the binary tree to traverse.
@@ -144,3 +144,34 @@ def find_path_with_sum(root: TreeNode, target_sum: int) -> list[int] | None:
         return [root.val] + right
 
     return None
+
+
+def find_paths_with_sum(root: TreeNode, target_sum: int) -> list[list[int]] | None:
+    """Finds all paths in a binary tree where the sum of the node values equals
+    the target sum.
+
+    Args:
+        root (TreeNode): The root of the binary tree.
+        target_sum (int): The target sum for the paths.
+
+    Returns:
+        list[list[int]]: A list of lists, where each inner list represents a
+        path with the target sum. Returns an empty list if no such path exists.
+    """
+    if root is None:
+        return []
+
+    if root.left is None and root.right is None:
+        if target_sum == root.val:
+            return [[root.val]]
+        else:
+            return []
+
+    left = find_paths_with_sum(root.left, target_sum - root.val)
+    right = find_paths_with_sum(root.right, target_sum - root.val)
+
+    all_paths = []
+    for path in left + right:
+        all_paths.append([root.val] + path)
+
+    return all_paths
