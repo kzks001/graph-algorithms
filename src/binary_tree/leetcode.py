@@ -175,3 +175,35 @@ def find_paths_with_sum(root: TreeNode, target_sum: int) -> list[list[int]] | No
         all_paths.append([root.val] + path)
 
     return all_paths
+
+
+###########################################
+## Example: Count Good Nodes Binary Tree ##
+###########################################
+
+
+def count_good_nodes(root: TreeNode, max_val: int = float("-inf")) -> int:
+    """
+    Counts the number of "good" nodes in a binary tree. A node is considered
+    "good" if its value is greater than or equal to the maximum value seen
+    along the path from the root to that node.
+
+    Args:
+        root (TreeNode): The root of the binary tree.
+        max_val (int, optional): The maximum value encountered along the
+            path to the current node. Defaults to negative infinity.
+
+    Returns:
+        int: The count of "good" nodes in the binary tree.
+    """
+    if root is None:
+        return 0
+
+    is_good = root.val >= max_val
+    max_val = max(root.val, max_val)
+
+    return (
+        (1 if is_good else 0)
+        + count_good_nodes(root.left, max_val)
+        + count_good_nodes(root.right, max_val)
+    )
