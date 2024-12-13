@@ -116,7 +116,7 @@ def count_path_sum_recursive(root: TreeNode, target_sum: int) -> int:
     return left + right
 
 
-def has_path_sum_path(root: TreeNode, target_sum: int) -> list[int] | None:
+def find_path_with_sum(root: TreeNode, target_sum: int) -> list[int] | None:
     """Finds a path in a binary tree where the sum of the node values equals the
     target sum.
 
@@ -135,11 +135,11 @@ def has_path_sum_path(root: TreeNode, target_sum: int) -> list[int] | None:
         if target_sum == root.val:
             return [root.val]
 
-    left = has_path_sum_path(root.left, target_sum - root.val)
+    left = find_path_with_sum(root.left, target_sum - root.val)
     if left is not None:
         return [root.val] + left
 
-    right = has_path_sum_path(root.right, target_sum - root.val)
+    right = find_path_with_sum(root.right, target_sum - root.val)
     if right is not None:
         return [root.val] + right
 
